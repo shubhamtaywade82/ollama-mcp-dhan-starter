@@ -1,0 +1,60 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "TradingPlan",
+    "type": "object",
+    "required": [
+      "intent",
+      "underlying",
+      "expiry_kind",
+      "risk",
+      "strike_selector",
+      "filters",
+      "explanation"
+    ],
+    "properties": {
+      "intent": { "type": "string", "enum": ["enter", "exit", "modify", "cancel", "noop"] },
+      "underlying": { "type": "string", "enum": ["NIFTY", "BANKNIFTY", "FINNIFTY"] },
+      "direction": {
+        "anyOf": [
+          { "type": "string", "enum": ["CE", "PE"] },
+          { "type": "null" }
+        ]
+      },
+      "expiry_kind": { "type": "string", "enum": ["current_week", "next_week", "monthly"] },
+      "strike_selector": {
+        "type": "object",
+        "required": ["mode"],
+        "properties": {
+          "mode": { "type": "string", "enum": ["ATM", "OTM", "ITM", "ABSOLUTE", "DELTA"] },
+          "value": { "type": ["number", "integer"], "description": "steps for OTM/ITM, delta target for DELTA, or absolute strike" }
+        },
+        "additionalProperties": false
+      },
+      "filters": {
+        "type": "object",
+        "properties": {
+          "min_oi": { "type": ["number", "integer"] },
+          "max_iv_percentile": { "type": ["number", "integer"] },
+          "liquidity": { "type": "string", "enum": ["normal", "strict"] }
+        },
+        "additionalProperties": false
+      },
+      "risk": {
+        "type": "object",
+        "required": ["allocation_pct", "sl_pct", "tp_pct"],
+        "properties": {
+          "allocation_pct": { "type": "number" },
+          "max_lots": { "type": ["integer", "null"] },
+          "sl_pct": { "type": "number" },
+          "tp_pct": { "type": "number" },
+          "trail_tick": { "type": ["number", "null"] },
+          "breakeven_after_gain_pct": { "type": ["number", "null"] }
+        },
+        "additionalProperties": false
+      },
+      "notes": { "type": "array", "items": { "type": "string" } },
+      "modify_params": { "type": ["object", "null"] },
+      "explanation": { "type": "string" }
+    },
+    "additionalProperties": false
+  }
