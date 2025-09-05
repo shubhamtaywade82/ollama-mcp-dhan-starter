@@ -1,3 +1,3 @@
 Signal: 15m Supertrend flipped bullish on NIFTY; ATR regime=mid; IV%<=70.
 Goal: If conditions are met, plan a CE buy for next_week with 30/60 RR, BE at +15%, trail 2.
-Use strict liquidity and prefer ATM±1 strikes.
+Use strict liquidity and prefer ATM strikes (use {"mode": "ATM"} in strike_selector).

@@ -26,16 +26,16 @@ export class MasterLookup {
     const csv = fs.readFileSync(csvPath, "utf8");
     const recs = parse(csv, { columns: true, skip_empty_lines: true });
     this.rows = recs.map((r: any) => ({
-      security_id: Number(r.security_id),
-      trading_symbol: r.trading_symbol,
-      exchange_segment: Number(r.exchange_segment),
-      instrument_type: r.instrument_type,
-      underlying_symbol: r.underlying_symbol,
-      expiry: r.expiry,
-      strike: Number(r.strike),
-      option_type: r.option_type,
-      lot_size: Number(r.lot_size),
-      tick_size: Number(r.tick_size),
+      security_id: Number(r.SECURITY_ID),
+      trading_symbol: r.SYMBOL_NAME,
+      exchange_segment: Number(r.SEGMENT),
+      instrument_type: r.INSTRUMENT_TYPE,
+      underlying_symbol: r.UNDERLYING_SYMBOL,
+      expiry: r.SM_EXPIRY_DATE,
+      strike: Number(r.STRIKE_PRICE),
+      option_type: r.OPTION_TYPE,
+      lot_size: Number(r.LOT_SIZE),
+      tick_size: Number(r.TICK_SIZE),
     }));
     for (const row of this.rows) {
       const k = this.key(

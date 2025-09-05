@@ -53,6 +53,7 @@ for (let step = 0; step < MAX_STEPS; step++) {
     body: JSON.stringify({
       model: cfg.LLM_MODEL,
       format: "json",
+      temperature: 0.2,
       messages,
     }),
   });
@@ -90,7 +91,24 @@ for (let step = 0; step < MAX_STEPS; step++) {
       continue;
     }
     console.log("FINAL PLAN JSON:\n", JSON.stringify(plan, null, 2));
-    process.exit(0);
+
+    // Safety Guards - Prevent execution if not enabled
+    if (!cfg.EXECUTE_ORDERS) {
+      console.log(
+        "\n🚨 SAFETY GUARD: EXECUTE_ORDERS=false - No orders will be placed"
+      );
+      console.log("To enable order execution, set EXECUTE_ORDERS=true in .env");
+    }
+
+    if (cfg.PAPER_MODE) {
+      console.log("📄 PAPER_MODE: true - Running in paper trading mode");
+      console.log("To enable live trading, set PAPER_MODE=false in .env");
+    }
+
+    console.log(
+      "\n✅ Plan generated successfully! Agent will continue running..."
+    );
+    // Remove process.exit(0) to keep the agent running
   } catch {
     // Ask model to return JSON only
     messages.push({

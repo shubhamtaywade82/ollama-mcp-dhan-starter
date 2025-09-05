@@ -8,8 +8,10 @@
     "build": "tsc -p tsconfig.json",
     "dev:mcp": "ts-node src/mcp/server.ts",
     "dev:agent": "ts-node src/agent/host.ts",
+    "dev:server": "ts-node src/agent/server.ts",
     "start:mcp": "node dist/mcp/server.js",
-    "start:agent": "node dist/agent/host.js"
+    "start:agent": "node dist/agent/host.js",
+    "start:server": "node dist/agent/server.js"
   },
   "keywords": [],
   "author": "",
@@ -23,10 +25,12 @@
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.17.5",
+    "@types/express": "^5.0.3",
     "ajv": "^8.17.1",
     "axios": "^1.11.0",
     "csv-parse": "^6.1.0",
     "dotenv": "^17.2.2",
+    "express": "^5.1.0",
     "node-fetch": "^3.3.2",
     "ws": "^8.18.3",
     "zod": "^3.25.76"
