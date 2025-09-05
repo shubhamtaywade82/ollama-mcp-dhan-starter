@@ -47,14 +47,14 @@ export class DhanClient {
   // --- Helpers ---
   private async railsGet(path: string, params?: any) {
     const r = await axios.get(cfg.RAILS_EXECUTOR_URL + path, {
-      headers: { "X-API-KEY": cfg.RAILS_API_KEY },
+      headers: { "Content-Type": "application/json" },
       params,
     });
     return r.data;
   }
   private async railsPost(path: string, body: any) {
     const r = await axios.post(cfg.RAILS_EXECUTOR_URL + path, body, {
-      headers: { "X-API-KEY": cfg.RAILS_API_KEY },
+      headers: { "Content-Type": "application/json" },
     });
     return r.data;
   }

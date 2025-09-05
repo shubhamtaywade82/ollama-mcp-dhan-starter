@@ -71,7 +71,10 @@ MASTER_CSV=./data/dhan_master_script.csv
 
 # Rails Executor Configuration
 RAILS_EXECUTOR_URL=http://localhost:3000
-RAILS_API_KEY=your_api_key_here
+
+# Dhan API Configuration (if using MODE=dhan)
+DHAN_ACCESS_TOKEN=your_dhan_access_token_here
+DHAN_CLIENT_ID=your_dhan_client_id_here
 
 # Safety Guards - DO NOT ENABLE UNTIL READY FOR REAL TRADING
 EXECUTE_ORDERS=false
@@ -314,7 +317,7 @@ curl http://localhost:3001/health
 ruby stub_server.rb
 
 # Test MCP tools
-curl -H "X-API-Key: changeme" http://localhost:3000/llm/funds
+curl http://localhost:3000/llm/funds
 ```
 
 ## 🔄 Complete Workflow

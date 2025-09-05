@@ -12,23 +12,12 @@ set :server, :webrick
 before do
   headers 'Access-Control-Allow-Origin' => '*'
   headers 'Access-Control-Allow-Methods' => 'GET, POST, OPTIONS'
-  headers 'Access-Control-Allow-Headers' => 'Content-Type, Authorization, X-API-Key'
+  headers 'Access-Control-Allow-Headers' => 'Content-Type'
 end
 
 # Handle preflight requests
 options '*' do
   200
-end
-
-# Simple API key validation
-def validate_api_key
-  api_key = request.env['HTTP_X_API_KEY'] || request.env['HTTP_AUTHORIZATION']&.gsub('Bearer ', '')
-  halt 401, { error: 'Unauthorized' }.to_json unless api_key == 'changeme'
-end
-
-# Apply API key validation to all routes
-before do
-  validate_api_key
 end
 
 # GET /llm/funds - Return available funds
